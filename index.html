@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Data Encryption and Decryption</title>
+</head>
+
+<body>
+    <h1>Data Encryption and Decryption</h1>
+    <label for="input-text">Enter text to encrypt/decrypt:</label><br>
+    <textarea id="input-text"></textarea><br>
+    <label for="key">Enter encryption/decryption key:</label><br>
+    <input type="password" id="key"><br>
+    <button onclick="encrypt()">Encrypt</button>
+    <button onclick="decrypt()">Decrypt</button>
+    <br><br>
+    <label for="output-text">Encrypted/decrypted text:</label><br>
+    <textarea id="output-text"></textarea>
+
+    <script>
+        function encrypt() {
+            const input = document.getElementById("input-text").value;
+            const key = document.getElementById("key").value;
+            const encrypted = CryptoJS.AES.encrypt(input, key);
+            document.getElementById("output-text").value = encrypted.toString();
+        }
+
+        function decrypt() {
+            const encrypted = document.getElementById("output-text").value;
+            const key = document.getElementById("key").value;
+            const decrypted = CryptoJS.AES.decrypt(encrypted, key).toString(CryptoJS.enc.Utf8);
+            document.getElementById("input-text").value = decrypted;
+        }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</body>
+
+</html>
